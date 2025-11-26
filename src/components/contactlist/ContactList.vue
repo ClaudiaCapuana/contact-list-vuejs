@@ -5,6 +5,13 @@ import Tablelist from "./ui/tablelist/Tablelist.vue";
 import { onMounted, reactive } from "vue";
 import DB from "@/DB";
 const contacts = reactive([]);
+const onDelete = async (id) => {
+  await DB.deleteOne(id);
+  const index = contacts.findIndex((contact) => contact.id === id);
+  if (index !== -1) {
+    contacts.splice(index, 1);
+  }
+};
 
 onMounted(async () => {
   DB.setApiUrl("https://68de7109d7b591b4b78f8da0.mockapi.io/");
@@ -19,7 +26,7 @@ onMounted(async () => {
     <!-- Filtre de recherche -->
     <search-bar></search-bar>
     <!-- Liste des contacts triée et filtrée -->
-    <tablelist :contacts="contacts"></tablelist>
+    <tablelist :contacts="contacts" @on-delete="onDelete"></tablelist>
   </section>
 </template>
 <style scoped></style>
