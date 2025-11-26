@@ -1,5 +1,8 @@
 <script setup>
 import contact from "./ui/contact.vue";
+const props = defineProps({
+  contacts: { type: Array },
+});
 </script>
 <template>
   <table class="table-auto w-full contacts-table">
@@ -16,7 +19,11 @@ import contact from "./ui/contact.vue";
       </tr>
     </thead>
     <tbody>
-      <contact></contact>
+      <contact
+        v-for="contact in contacts"
+        :key="contact.id"
+        :contact="contact"
+      ></contact>
     </tbody>
   </table>
 </template>
