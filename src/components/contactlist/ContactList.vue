@@ -2,10 +2,10 @@
 import ContactlistHeader from "./ui/ContactlistHeader.vue";
 import SearchBar from "./ui/SearchBar.vue";
 import Tablelist from "./ui/tablelist/Tablelist.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, watch } from "vue";
 import DB from "@/DB";
 const contacts = reactive([]);
-const onDelete = async (id) => {
+const deleteContact = async (id) => {
   await DB.deleteOne(id);
   const index = contacts.findIndex((contact) => contact.id === id);
   if (index !== -1) {
@@ -19,6 +19,14 @@ onMounted(async () => {
   contacts.splice(contacts.length, 0, ...response);
   console.table(contacts);
 });
+
+const props = defineProps({ formData: { type: Object } });
+
+const AddContact = async () => {
+  const response = await DB.create(props.formData);
+  contacts.splice(contacts.length, 0, response);
+};
+watch(props.formData, AddContact);
 </script>
 <template>
   <section class="w-2/3 p-6">
@@ -26,7 +34,7 @@ onMounted(async () => {
     <!-- Filtre de recherche -->
     <search-bar></search-bar>
     <!-- Liste des contacts triée et filtrée -->
-    <tablelist :contacts="contacts" @on-delete="onDelete"></tablelist>
+    <tablelist :contacts="contacts" @on-delete="deleteContact"></tablelist>
   </section>
 </template>
 <style scoped></style>

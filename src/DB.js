@@ -13,9 +13,9 @@ export default class DB {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        firstname: data.firstname,
-        lastname: data.lastname,
-        email: data.email,
+        firstname: data.firstnameValue,
+        lastname: data.lastnameValue,
+        email: data.emailValue,
       }),
     });
     return response.json();
