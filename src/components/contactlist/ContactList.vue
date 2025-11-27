@@ -12,6 +12,9 @@ const deleteContact = async (id) => {
     contacts.splice(index, 1);
   }
 };
+const updateContact = async (newData) => {
+  const response = await DB.updateOne(newData);
+};
 
 onMounted(async () => {
   DB.setApiUrl("https://68de7109d7b591b4b78f8da0.mockapi.io/");
@@ -34,7 +37,11 @@ watch(props.formData, AddContact);
     <!-- Filtre de recherche -->
     <search-bar></search-bar>
     <!-- Liste des contacts triée et filtrée -->
-    <tablelist :contacts="contacts" @on-delete="deleteContact"></tablelist>
+    <tablelist
+      :contacts="contacts"
+      @on-delete="deleteContact"
+      @on-update="updateContact"
+    ></tablelist>
   </section>
 </template>
 <style scoped></style>
