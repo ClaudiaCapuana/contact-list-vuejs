@@ -2,6 +2,7 @@
 import Contact from "./ui/Contact.vue";
 const props = defineProps({
   contacts: { type: Array },
+  searchingArray: { type: Array },
 });
 const emit = defineEmits(["onDelete", "onUpdate"]);
 const onDelete = (id) => {
@@ -27,7 +28,7 @@ const onUpdate = (newData) => {
     </thead>
     <tbody>
       <contact
-        v-for="contact in contacts"
+        v-for="contact in searchingArray"
         :key="contact.id"
         :contact="contact"
         @onDelete="onDelete"
