@@ -7,7 +7,6 @@ const emit = defineEmits(["onInput"]);
 
 const onInput = () => {
   emit("onInput", lastname.value);
-  console.log("j'envoie lastname depuis l'input: " + lastname.value);
 };
 </script>
 <template>

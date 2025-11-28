@@ -5,7 +5,6 @@ const firstname = ref("");
 const emit = defineEmits(["onInput"]);
 const onInput = () => {
   emit("onInput", firstname.value);
-  console.log("j'envoie firstname depuis l'input: " + firstname.value);
 };
 </script>
 <template>

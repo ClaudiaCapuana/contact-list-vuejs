@@ -5,7 +5,6 @@ const email = ref("");
 const emit = defineEmits(["onInput"]);
 const onInput = () => {
   emit("onInput", email.value);
-  console.log("j'envoie email depuis l'input: " + email.value);
 };
 </script>
 <template>

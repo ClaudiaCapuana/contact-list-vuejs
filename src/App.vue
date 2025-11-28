@@ -3,7 +3,6 @@ import { reactive } from "vue";
 import AddForm from "./components/addForm/AddForm.vue";
 import AppFooter from "./components/AppFooter.vue";
 import ContactList from "./components/contactlist/ContactList.vue";
-import DB from "./DB";
 
 const formData = reactive({});
 

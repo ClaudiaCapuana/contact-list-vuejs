@@ -18,9 +18,6 @@ const onSubmit = () => {
     lastnameValue: props.lastnameValue,
     emailValue: props.emailValue,
   });
-  console.log(
-    "j'ai cliqué le bouton add: " + props.firstnameValue + props.lastnameValue
-  );
 };
 </script>
 <template>
