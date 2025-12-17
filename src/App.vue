@@ -1,20 +1,20 @@
 <script setup>
-import { reactive } from "vue";
-import AddForm from "./components/addForm/AddForm.vue";
-import AppFooter from "./components/AppFooter.vue";
-import ContactList from "./components/contactlist/ContactList.vue";
-
+import { reactive, onMounted } from "vue";
+import AddForm from "./modules/addForm/AddForm.vue";
+import AppFooter from "./layout/AppFooter.vue";
+import ContactList from "./modules/contactlist/ContactList.vue";
+import { store } from "./stores/contacts";
 const formData = reactive({});
 
-const getFormData = (data) => {
-  Object.assign(formData, data);
-};
+onMounted(async () => {
+  await store.init("https://6942aaef69b12460f3124d89.mockapi.io/");
+});
 </script>
 
 <template>
   <!-- Section droite pour la liste des contacts -->
-  <AddForm @on-submit="getFormData"></AddForm>
-  <ContactList :formData="formData"></ContactList>
+  <AddForm></AddForm>
+  <ContactList></ContactList>
   <AppFooter></AppFooter>
 </template>
 
