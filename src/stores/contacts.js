@@ -2,13 +2,14 @@ import { reactive, computed, ref } from "vue";
 import DB from "@/services/DB";
 
 const contacts = reactive([]);
+const searchValue = ref(null);
 
 const formData = reactive({
   addFirstname: "",
   addLastname: "",
   addEmail: "",
 });
-const editClass = ref("");
+const editClass = ref(null);
 
 const isCompleted = computed(() => {
   if (formData.addFirstname && formData.addLastname && formData.addEmail) {
@@ -43,9 +44,9 @@ const init = async (url) => {
 
 const deleteContact = async (id) => {
   await DB.deleteOne(id);
-  const index = store.contacts.findIndex((contact) => contact.id === id);
+  const index = contacts.findIndex((contact) => contact.id === id);
   if (index !== -1) {
-    store.contacts.splice(index, 1);
+    contacts.splice(index, 1);
   }
 };
 
@@ -62,9 +63,28 @@ const editing = (id) => {
   editClass.value = id;
 };
 
+const filteredContacts = computed(() => {
+  if (!searchValue.value) {
+    return contacts;
+  }
+  return contacts.filter(
+    (contact) =>
+      contact.firstname.toLowerCase().includes(searchValue.value) ||
+      contact.lastname.toLowerCase().includes(searchValue.value) ||
+      contact.email.toLowerCase().includes(searchValue.value)
+  );
+});
+
+// watch(
+//   contacts,
+//   () => {
+//     filteredContacts.value = contacts;
+//   },
+//   { deep: true }
+// );
+
 export const store = reactive({
   init,
-  contacts,
   formData,
   createContact,
   deleteContact,
@@ -72,4 +92,6 @@ export const store = reactive({
   contactCount,
   editing,
   editClass,
+  searchValue,
+  filteredContacts,
 });

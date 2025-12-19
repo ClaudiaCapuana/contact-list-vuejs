@@ -2,29 +2,7 @@
 import ContactlistHeader from "./components/ContactlistHeader.vue";
 import SearchBar from "./components/SearchBar.vue";
 import Tablelist from "./components/Tablelist.vue";
-import { onMounted, watch, ref, computed } from "vue";
-import DB from "@/services/DB";
 import { store } from "@/stores/contacts";
-
-// const filteredContacts = ref(contacts.value);
-
-// const searchingArray = (searchValue) => {
-//   filteredContacts.value = store.contacts.filter(
-//     (contact) =>
-//       contact.firstname.toLowerCase().includes(searchValue) ||
-//       contact.lastname.toLowerCase().includes(searchValue) ||
-//       contact.email.toLowerCase().includes(searchValue)
-//   );
-// };
-
-// watch(props.formData, addContact);
-// watch(
-//   contacts,
-//   () => {
-//     filteredContacts.value = contacts.value;
-//   },
-//   { deep: true }
-// );
 </script>
 <template>
   <section class="w-2/3 p-6">
@@ -32,11 +10,10 @@ import { store } from "@/stores/contacts";
       :numberContact="store.contactCount"
     ></contactlist-header>
     <!-- Filtre de recherche -->
-    <search-bar @on-search="searchingArray"></search-bar>
+    <search-bar v-model="store.searchValue"></search-bar>
     <!-- Liste des contacts triée et filtrée -->
     <tablelist
-      :contacts="store.contacts"
-      :searchingArray="store.filteredContacts"
+      :filteredContacts="store.filteredContacts"
       @on-delete="store.deleteContact"
       @on-update="store.updateContact"
       @on-editing="store.editing"

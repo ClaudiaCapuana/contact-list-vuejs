@@ -1,8 +1,7 @@
 <script setup>
 import Contact from "./Contact.vue";
 const props = defineProps({
-  contacts: { type: Array },
-  searchingArray: { type: Array },
+  filteredContacts: { type: Array },
   edit: { type: Number },
 });
 const emit = defineEmits(["onDelete", "onUpdate", "onEditing"]);
@@ -32,7 +31,7 @@ const onEditing = (id) => {
     </thead>
     <tbody>
       <contact
-        v-for="contact in props.contacts"
+        v-for="contact in props.filteredContacts"
         :key="contact.id"
         :contact="contact"
         @onDelete="onDelete"
