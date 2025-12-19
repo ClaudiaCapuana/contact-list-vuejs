@@ -3,13 +3,17 @@ import Contact from "./Contact.vue";
 const props = defineProps({
   contacts: { type: Array },
   searchingArray: { type: Array },
+  edit: { type: Number },
 });
-const emit = defineEmits(["onDelete", "onUpdate"]);
+const emit = defineEmits(["onDelete", "onUpdate", "onEditing"]);
 const onDelete = (id) => {
   emit("onDelete", id);
 };
 const onUpdate = (newData) => {
   emit("onUpdate", newData);
+};
+const onEditing = (id) => {
+  emit("onEditing", id);
 };
 </script>
 <template>
@@ -28,11 +32,13 @@ const onUpdate = (newData) => {
     </thead>
     <tbody>
       <contact
-        v-for="contact in searchingArray"
+        v-for="contact in props.contacts"
         :key="contact.id"
         :contact="contact"
         @onDelete="onDelete"
         @on-update="onUpdate"
+        @on-editing="onEditing"
+        :edit="props.edit === contact.id"
       ></contact>
     </tbody>
   </table>
