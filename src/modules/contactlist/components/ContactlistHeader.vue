@@ -7,7 +7,7 @@ const props = defineProps({
   <div class="flex justify-between items-center mb-4">
     <h2 class="text-xl font-bold mb-4">Contacts List</h2>
     <p class="text-gray-600 mb-4">
-      Contacts Count : <span class="font-bold">{{ numberContact }}</span>
+      Contacts Count : <span class="font-bold">{{ props.numberContact }}</span>
     </p>
   </div>
 </template>

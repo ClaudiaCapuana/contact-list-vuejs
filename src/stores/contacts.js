@@ -55,7 +55,7 @@ const updateContact = async (newData) => {
 };
 
 const contactCount = computed(() => {
-  return store.contacts.length;
+  return contacts.length;
 });
 
 const editing = (id) => {
