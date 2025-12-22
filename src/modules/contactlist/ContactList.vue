@@ -17,6 +17,7 @@ import { store } from "@/stores/contacts";
       @on-delete="store.deleteContact"
       @on-update="store.updateContact"
       @on-editing="store.editing"
+      @on-sort="store.toggleSort"
       :edit="store.editClass"
     ></tablelist>
   </section>
